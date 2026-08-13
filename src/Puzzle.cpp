@@ -99,11 +99,14 @@ std::vector<Move> Puzzle::generateValidMoves() const {
 
     return moves;
 }
-
 bool Puzzle::isSolved() const {
     for (const Tube& tube : tubes) {
         if (tube.isEmpty()) {
             continue;
+        }
+
+        if (!tube.isFull()) {
+            return false;
         }
 
         const std::vector<int>& colors = tube.getColors();
@@ -118,7 +121,6 @@ bool Puzzle::isSolved() const {
 
     return true;
 }
-
 std::string Puzzle::encode() const {
     std::ostringstream state;
 
